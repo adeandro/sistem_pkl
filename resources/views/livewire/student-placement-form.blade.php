@@ -18,62 +18,43 @@
 
                 <!-- Body -->
                 <div class="p-6">
-                    @if($step === 1)
-                        <!-- Step 1: Input NIS -->
-                        <form wire:submit="verifyNis" class="space-y-5">
-                            <div>
-                                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Nomor Induk Siswa (NIS)</label>
-                                <input type="text" wire:model.defer="nis" placeholder="Masukkan NIS Anda..." class="block w-full rounded-xl border-slate-200 shadow-sm focus:border-violet-500 focus:ring focus:ring-violet-500/20 dark:bg-slate-950 dark:border-slate-800 dark:text-white sm:text-sm transition-all duration-200 px-4 py-3">
-                                @error('nis') <span class="text-sm text-red-500 mt-2 block font-medium">{{ $message }}</span> @enderror
-                            </div>
-                            <div class="pt-2">
-                                <button type="submit" class="w-full px-4 py-3 bg-violet-600 text-white rounded-xl shadow-sm hover:bg-violet-700 hover:shadow-md transition-all duration-200 font-semibold active:scale-[0.98] flex justify-center items-center gap-2" wire:loading.attr="disabled">
-                                    <span wire:loading.remove wire:target="verifyNis">Lanjut</span>
-                                    <svg wire:loading wire:target="verifyNis" class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                                    <span wire:loading wire:target="verifyNis">Memeriksa...</span>
-                                </button>
-                            </div>
-                        </form>
-                    @elseif($step === 2)
-                        <!-- Step 2: Input Lokasi PKL -->
-                        <div class="mb-6 p-4 bg-violet-50 dark:bg-violet-500/10 border border-violet-100 dark:border-violet-500/20 rounded-xl flex items-center gap-4 shadow-sm">
-                            <div class="w-12 h-12 rounded-full bg-violet-100 dark:bg-violet-900/50 flex items-center justify-center text-violet-600 dark:text-violet-400 shrink-0">
-                                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                            </div>
-                            <div>
-                                <p class="text-[11px] text-violet-600/80 dark:text-violet-400/80 font-bold uppercase tracking-wider mb-0.5">Identitas Anda</p>
-                                <p class="text-sm font-bold text-violet-900 dark:text-violet-100">{{ $student->name }} <span class="font-medium opacity-70 ml-1 border border-violet-200 dark:border-violet-800 rounded px-1.5 py-0.5">NIS: {{ $student->nis }}</span></p>
+                    <form wire:submit="submit" class="space-y-6">
+                        <!-- NIS Input -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Nomor Induk Siswa (NIS)</label>
+                            <input type="text" wire:model.live.debounce.500ms="nis" placeholder="Ketik NIS Anda..." class="block w-full rounded-xl border-slate-200 shadow-sm focus:border-violet-500 focus:ring focus:ring-violet-500/20 dark:bg-slate-950 dark:border-slate-800 dark:text-white sm:text-sm transition-all duration-200 px-4 py-3" autofocus>
+                            @if($nisError)
+                                <span class="text-sm text-red-500 mt-2 block font-medium">{{ $nisError }}</span>
+                            @endif
+                            <div wire:loading wire:target="nis" class="mt-2 text-sm text-slate-500 font-medium flex items-center gap-2">
+                                <svg class="animate-spin h-4 w-4 text-violet-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                                Memeriksa NIS...
                             </div>
                         </div>
 
-                        <form wire:submit="verifyCompany" class="space-y-6">
-                            <div>
+                        @if($student)
+                            <!-- Identitas -->
+                            <div class="p-4 bg-violet-50 dark:bg-violet-500/10 border border-violet-100 dark:border-violet-500/20 rounded-xl flex items-center gap-4 shadow-sm animate-in fade-in slide-in-from-top-4 duration-300">
+                                <div class="w-10 h-10 rounded-full bg-violet-100 dark:bg-violet-900/50 flex items-center justify-center text-violet-600 dark:text-violet-400 shrink-0">
+                                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold text-violet-900 dark:text-violet-100">{{ $student->name }}</p>
+                                    <p class="text-[11px] text-violet-600/80 dark:text-violet-400/80 font-medium">Data Ditemukan</p>
+                                </div>
+                            </div>
+
+                            <!-- Input Company Name -->
+                            <div class="animate-in fade-in slide-in-from-top-4 duration-300">
                                 <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Nama Instansi / Perusahaan PKL</label>
-                                <input type="text" wire:model.defer="companyName" placeholder="Contoh: PT Semesta Ilmu" class="block w-full rounded-xl border-slate-200 shadow-sm focus:border-violet-500 focus:ring focus:ring-violet-500/20 dark:bg-slate-950 dark:border-slate-800 dark:text-white sm:text-sm transition-all duration-200 px-4 py-3">
-                                <p class="text-xs text-slate-500 mt-2">Pastikan penulisan nama instansi benar (huruf besar/kecil berpengaruh pada pengelompokan).</p>
+                                <input type="text" wire:model.live.debounce.500ms="companyName" placeholder="Contoh: PT Semesta Ilmu" class="block w-full rounded-xl border-slate-200 shadow-sm focus:border-violet-500 focus:ring focus:ring-violet-500/20 dark:bg-slate-950 dark:border-slate-800 dark:text-white sm:text-sm transition-all duration-200 px-4 py-3">
                                 @error('companyName') <span class="text-sm text-red-500 mt-2 block font-medium">{{ $message }}</span> @enderror
                             </div>
+                        @endif
 
-                            <div class="pt-4 flex gap-3 border-t border-slate-100 dark:border-slate-800/60">
-                                <button type="button" wire:click="$set('step', 1)" class="px-5 py-3 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors font-semibold text-sm">
-                                    Kembali
-                                </button>
-                                <button type="submit" class="flex-1 px-5 py-3 bg-violet-600 text-white rounded-xl shadow-sm hover:bg-violet-700 hover:shadow-md transition-all duration-200 font-semibold active:scale-[0.98] flex justify-center items-center gap-2" wire:loading.attr="disabled">
-                                    <span wire:loading.remove wire:target="verifyCompany">Lanjut Pilih Teman</span>
-                                    <svg wire:loading wire:target="verifyCompany" class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                                    <span wire:loading wire:target="verifyCompany">Memproses...</span>
-                                </button>
-                            </div>
-                        </form>
-                    @elseif($step === 3)
-                        <!-- Step 3: Pilih Teman Kelompok -->
-                        <div class="mb-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl p-3 border border-slate-100 dark:border-slate-800">
-                            <p class="text-xs text-slate-500 mb-1">Instansi yang Anda pilih:</p>
-                            <p class="text-sm font-bold text-slate-900 dark:text-white">{{ $companyName }}</p>
-                        </div>
-
-                        <form wire:submit="submit" class="space-y-4">
-                            <div>
+                        @if($student && strlen(trim($companyName)) >= 3)
+                            <!-- Select Students -->
+                            <div class="animate-in fade-in slide-in-from-top-4 duration-300">
                                 <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 flex justify-between items-end">
                                     <span>Pilih Anggota Kelompok</span>
                                     <span class="text-xs font-semibold px-2 py-0.5 bg-slate-100 dark:bg-slate-800 rounded-md text-slate-600 dark:text-slate-400">{{ count($selectedStudents) }} terpilih</span>
@@ -104,18 +85,15 @@
                                 @error('selectedStudents') <span class="text-sm text-red-500 mt-2 block font-medium">{{ $message }}</span> @enderror
                             </div>
 
-                            <div class="pt-4 flex gap-3 border-t border-slate-100 dark:border-slate-800/60">
-                                <button type="button" wire:click="$set('step', 2)" class="px-5 py-3 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors font-semibold text-sm">
-                                    Kembali
-                                </button>
-                                <button type="submit" class="flex-1 px-5 py-3 bg-violet-600 text-white rounded-xl shadow-sm hover:bg-violet-700 hover:shadow-md transition-all duration-200 font-semibold active:scale-[0.98] flex justify-center items-center gap-2" wire:loading.attr="disabled">
-                                    <span wire:loading.remove wire:target="submit">Simpan & Daftarkan</span>
+                            <div class="pt-4 border-t border-slate-100 dark:border-slate-800/60 animate-in fade-in slide-in-from-bottom-4 duration-300">
+                                <button type="submit" class="w-full px-5 py-3 bg-violet-600 text-white rounded-xl shadow-sm hover:bg-violet-700 hover:shadow-md transition-all duration-200 font-semibold active:scale-[0.98] flex justify-center items-center gap-2" wire:loading.attr="disabled">
+                                    <span wire:loading.remove wire:target="submit">Simpan & Daftarkan Kelompok</span>
                                     <svg wire:loading wire:target="submit" class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                                     <span wire:loading wire:target="submit">Memproses...</span>
                                 </button>
                             </div>
-                        </form>
-                    @endif
+                        @endif
+                    </form>
                 </div>
             </div>
         </div>

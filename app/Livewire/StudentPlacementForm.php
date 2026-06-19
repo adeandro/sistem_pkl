@@ -11,13 +11,11 @@ use Livewire\Attributes\On;
 class StudentPlacementForm extends Component
 {
     public $showModal = false;
-    public $step = 1;
     
-    // Step 1
     public $nis = '';
     public $student = null;
+    public $nisError = '';
     
-    // Step 2
     public $companyName = '';
     public $selectedStudents = [];
 
@@ -30,9 +28,9 @@ class StudentPlacementForm extends Component
 
     public function resetForm()
     {
-        $this->step = 1;
         $this->nis = '';
         $this->student = null;
+        $this->nisError = '';
         $this->companyName = '';
         $this->selectedStudents = [];
         $this->resetValidation();
@@ -44,50 +42,45 @@ class StudentPlacementForm extends Component
         $this->resetForm();
     }
 
-    public function verifyNis()
+    public function updatedNis($value)
     {
-        $this->validate([
-            'nis' => 'required|string',
-        ], [
-            'nis.required' => 'NIS tidak boleh kosong.',
-        ]);
+        $this->student = null;
+        $this->nisError = '';
+        $this->companyName = '';
+        $this->selectedStudents = [];
+        $this->resetValidation();
 
-        $student = Student::where('nis', trim($this->nis))->first();
+        $value = trim($value);
+        if (empty($value)) {
+            return;
+        }
+
+        $student = Student::where('nis', $value)->first();
 
         if (!$student) {
-            $this->addError('nis', 'NIS tidak terdaftar di sistem.');
+            $this->nisError = 'NIS tidak terdaftar di sistem.';
             return;
         }
 
         if ($student->is_assigned) {
-            $this->addError('nis', 'Siswa ini sudah mendapatkan penempatan PKL.');
+            $this->nisError = 'Siswa ini sudah mendapatkan penempatan PKL.';
             return;
         }
 
         $this->student = $student;
         $this->selectedStudents = [$student->id];
-        $this->step = 2;
-    }
-
-    public function verifyCompany()
-    {
-        $this->validate([
-            'companyName' => 'required|string|min:3',
-        ], [
-            'companyName.required' => 'Nama instansi wajib diisi.',
-            'companyName.min' => 'Nama instansi terlalu pendek.',
-        ]);
-
-        $this->step = 3;
     }
 
     public function submit()
     {
+        if (!$this->student) return;
+
         $this->validate([
             'companyName' => 'required|string|min:3',
             'selectedStudents' => 'required|array|min:1',
         ], [
             'companyName.required' => 'Nama instansi wajib diisi.',
+            'companyName.min' => 'Nama instansi terlalu pendek.',
             'selectedStudents.required' => 'Pilih minimal 1 siswa.',
         ]);
 
@@ -107,7 +100,6 @@ class StudentPlacementForm extends Component
                 $newCount = count($this->selectedStudents);
                 if (($currentCount + $newCount) > $placement->quota) {
                     $this->addError('companyName', 'Kuota instansi ini tidak mencukupi untuk jumlah siswa yang dipilih.');
-                    $this->step = 2; // Go back to company name step
                     DB::rollBack();
                     return;
                 }
@@ -136,14 +128,13 @@ class StudentPlacementForm extends Component
         } catch (\Exception $e) {
             DB::rollBack();
             $this->addError('companyName', 'Terjadi kesalahan sistem. Silakan coba lagi.');
-            $this->step = 2;
         }
     }
 
     public function render()
     {
         $availableStudents = [];
-        if ($this->step === 3) {
+        if ($this->student && strlen(trim($this->companyName)) >= 3) {
             $availableStudents = Student::where('is_assigned', false)
                 ->orderBy('name')
                 ->get();
