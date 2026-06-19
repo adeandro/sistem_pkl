@@ -69,6 +69,18 @@ class StudentPlacementForm extends Component
         $this->step = 2;
     }
 
+    public function verifyCompany()
+    {
+        $this->validate([
+            'companyName' => 'required|string|min:3',
+        ], [
+            'companyName.required' => 'Nama instansi wajib diisi.',
+            'companyName.min' => 'Nama instansi terlalu pendek.',
+        ]);
+
+        $this->step = 3;
+    }
+
     public function submit()
     {
         $this->validate([
@@ -76,7 +88,6 @@ class StudentPlacementForm extends Component
             'selectedStudents' => 'required|array|min:1',
         ], [
             'companyName.required' => 'Nama instansi wajib diisi.',
-            'companyName.min' => 'Nama instansi terlalu pendek.',
             'selectedStudents.required' => 'Pilih minimal 1 siswa.',
         ]);
 
@@ -96,6 +107,7 @@ class StudentPlacementForm extends Component
                 $newCount = count($this->selectedStudents);
                 if (($currentCount + $newCount) > $placement->quota) {
                     $this->addError('companyName', 'Kuota instansi ini tidak mencukupi untuk jumlah siswa yang dipilih.');
+                    $this->step = 2; // Go back to company name step
                     DB::rollBack();
                     return;
                 }
@@ -124,13 +136,14 @@ class StudentPlacementForm extends Component
         } catch (\Exception $e) {
             DB::rollBack();
             $this->addError('companyName', 'Terjadi kesalahan sistem. Silakan coba lagi.');
+            $this->step = 2;
         }
     }
 
     public function render()
     {
         $availableStudents = [];
-        if ($this->step === 2) {
+        if ($this->step === 3) {
             $availableStudents = Student::where('is_assigned', false)
                 ->orderBy('name')
                 ->get();
