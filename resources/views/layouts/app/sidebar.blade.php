@@ -15,6 +15,12 @@
                     <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
                     </flux:sidebar.item>
+                    <flux:sidebar.item icon="users" :href="route('admin.teachers')" :current="request()->routeIs('admin.teachers')" wire:navigate>
+                        {{ __('Guru Pembimbing') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="document-text" :href="route('admin.print-letter')" :current="request()->routeIs('admin.print-letter')" wire:navigate>
+                        {{ __('Cetak Surat Pengantar') }}
+                    </flux:sidebar.item>
                 </flux:sidebar.group>
             </flux:sidebar.nav>
 

@@ -3,6 +3,7 @@
 use Livewire\Component;
 use App\Models\Placement;
 use App\Models\Student;
+use App\Models\Teacher;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
 
@@ -40,6 +41,15 @@ new class extends Component {
         }
     }
 
+    public function assignTeacher($placementId, $teacherId)
+    {
+        $placement = Placement::find($placementId);
+        if ($placement) {
+            $teacherId = $teacherId === '' ? null : (int) $teacherId;
+            $placement->update(['teacher_id' => $teacherId]);
+        }
+    }
+
     public function removeStudent($studentId, $placementId)
     {
         DB::transaction(function () use ($studentId, $placementId) {
@@ -61,7 +71,8 @@ new class extends Component {
     public function with()
     {
         return [
-            'placements' => Placement::with('students')->orderBy('company_name')->get(),
+            'placements' => Placement::with(['students', 'teacher'])->orderBy('company_name')->get(),
+            'teachers' => Teacher::orderBy('name')->get(),
         ];
     }
 }; ?>
@@ -91,13 +102,28 @@ new class extends Component {
                             <div class="text-sm font-semibold text-slate-900 dark:text-slate-100 mb-2">
                                 {{ $placement->company_name }}
                             </div>
-                            <div class="flex items-center gap-2">
-                                <span class="text-xs text-slate-500">Batas Kuota:</span>
-                                <input type="number" 
-                                    value="{{ $placement->quota }}"
-                                    wire:change="updateQuota({{ $placement->id }}, $event.target.value)"
-                                    placeholder="Tak Terbatas"
-                                    class="w-24 px-2.5 py-1 text-xs rounded-lg border-slate-200 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500/20 dark:bg-slate-950 dark:border-slate-800 dark:text-slate-200 transition-colors">
+                            <div class="flex flex-col gap-2 mt-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-xs text-slate-500 w-24">Batas Kuota:</span>
+                                    <input type="number" 
+                                        value="{{ $placement->quota }}"
+                                        wire:change="updateQuota({{ $placement->id }}, $event.target.value)"
+                                        placeholder="Tak Terbatas"
+                                        class="flex-1 px-2.5 py-1 text-xs rounded-lg border-slate-200 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500/20 dark:bg-slate-950 dark:border-slate-800 dark:text-slate-200 transition-colors">
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-xs text-slate-500 w-24">Guru Pembimbing:</span>
+                                    <select 
+                                        wire:change="assignTeacher({{ $placement->id }}, $event.target.value)"
+                                        class="flex-1 px-2.5 py-1 text-xs rounded-lg border-slate-200 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500/20 dark:bg-slate-950 dark:border-slate-800 dark:text-slate-200 transition-colors">
+                                        <option value="">-- Belum Ditugaskan --</option>
+                                        @foreach($teachers as $teacher)
+                                            <option value="{{ $teacher->id }}" {{ $placement->teacher_id == $teacher->id ? 'selected' : '' }}>
+                                                {{ $teacher->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                         </td>
                         <td class="px-6 py-5">
