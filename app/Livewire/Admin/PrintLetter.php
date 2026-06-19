@@ -48,6 +48,6 @@ class PrintLetter extends Component
         return view('livewire.admin.print-letter', [
             'placements' => $placements,
             'selectedPlacement' => $selectedPlacement,
-        ]);
+        ])->layout('layouts.app', ['title' => 'Cetak Surat Pengantar']);
     }
 }

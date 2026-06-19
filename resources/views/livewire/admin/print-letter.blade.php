@@ -1,4 +1,4 @@
-<x-layouts::app :title="__('Cetak Surat Pengantar')">
+<div>
     <div class="flex h-full w-full flex-1 flex-col gap-8 py-8 px-4 md:px-8 max-w-[1400px] mx-auto print:hidden">
         <div class="space-y-6">
             <div class="flex justify-between items-center">
@@ -213,4 +213,4 @@
             </div>
         </div>
     @endif
-</x-layouts::app>
+</div>

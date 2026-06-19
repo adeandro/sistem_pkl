@@ -78,6 +78,6 @@ class TeacherManager extends Component
 
     public function render()
     {
-        return view('livewire.admin.teacher-manager');
+        return view('livewire.admin.teacher-manager')->layout('layouts.app', ['title' => 'Guru Pembimbing']);
     }
 }
