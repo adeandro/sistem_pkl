@@ -122,7 +122,7 @@
                     margin: 0;
                     padding: 0;
                 }
-                @page { margin: 3cm 3cm 3cm 4cm; }
+                @page { size: A4 portrait; margin: 0; }
             }
         </style>
         <div class="fixed inset-0 z-[100] bg-slate-100 dark:bg-slate-900 overflow-y-auto print:bg-white print:static print:overflow-visible flex flex-col">
@@ -141,35 +141,35 @@
 
             <div class="flex-1 py-8 print:py-0">
                 <!-- A4 Paper Container -->
-                <div id="print-area" class="bg-white w-full max-w-[210mm] min-h-[297mm] mx-auto pt-[3cm] pr-[3cm] pb-[3cm] pl-[4cm] shadow-lg print:shadow-none print:p-0 text-black font-serif relative">
+                <div id="print-area" class="bg-white w-full max-w-[210mm] min-h-[297mm] mx-auto pt-[30mm] pr-[30mm] pb-[30mm] pl-[40mm] shadow-lg print:shadow-none text-black font-serif relative box-border">
                     <!-- KOP SURAT -->
-                    <div class="flex pb-3 mb-1">
-                        <div class="w-32 shrink-0 flex items-center justify-center">
+                    <div class="flex pb-2 mb-1">
+                        <div class="w-28 shrink-0 flex items-center justify-center">
                             @if($logoPath)
-                                <img src="{{ Storage::url($logoPath) }}" class="w-24 h-24 object-contain">
+                                <img src="{{ Storage::url($logoPath) }}" class="w-20 h-20 object-contain">
                             @else
-                                <div class="w-24 h-24 bg-slate-200 flex items-center justify-center border border-slate-300 print:border-black">
+                                <div class="w-20 h-20 bg-slate-200 flex items-center justify-center border border-slate-300 print:border-black">
                                     <span class="text-[10px] font-sans text-center text-slate-500 leading-tight">LOGO<br>SEKOLAH</span>
                                 </div>
                             @endif
                         </div>
-                        <div class="flex-1 text-center pr-8 flex flex-col justify-center font-sans">
-                            <h2 class="text-[15px] leading-tight mb-1 text-black">YAYASAN PERSAUDARAAN HAJI AL MABRUR (YPHA)</h2>
-                            <h1 class="text-2xl font-bold leading-tight uppercase tracking-wide text-black">SMK AL MABRUR PEJAWARAN</h1>
-                            <p class="text-[14px] mt-1 text-black">Pon Pes Al Mabrur Rt 13 Rw 03 Gembol, Pejawaran, Banjarnegara 53454</p>
-                            <p class="text-[14px] text-black mt-0.5">Website: <span class="text-blue-700 underline">www.almabrur.net</span> | email: smkalmabrur@gmail.com</p>
+                        <div class="flex-1 text-center pr-6 flex flex-col justify-center font-sans">
+                            <h2 class="text-[14px] leading-tight mb-0.5 text-black">YAYASAN PERSAUDARAAN HAJI AL MABRUR (YPHA)</h2>
+                            <h1 class="text-[22px] font-bold leading-tight uppercase tracking-wide text-black">SMK AL MABRUR PEJAWARAN</h1>
+                            <p class="text-[13px] mt-1 text-black">Pon Pes Al Mabrur Rt 13 Rw 03 Gembol, Pejawaran, Banjarnegara 53454</p>
+                            <p class="text-[13px] text-black mt-0.5">Website: <span class="text-blue-700 underline">www.almabrur.net</span> | email: smkalmabrur@gmail.com</p>
                         </div>
                     </div>
                     <div class="border-b-[4px] border-black mb-1"></div>
-                    <div class="border-b border-black mb-6"></div>
+                    <div class="border-b border-black mb-4"></div>
 
                     <!-- Nomor Surat dll -->
-                    <div class="flex justify-between text-[15px] mb-6">
+                    <div class="flex justify-between text-[14px] mb-4">
                         <div>
                             <table class="border-none">
-                                <tr><td class="pr-6 py-0.5 align-top">Nomor</td><td class="align-top">:</td><td class="pl-2">{{ $letterNumber }}</td></tr>
-                                <tr><td class="pr-6 py-0.5 align-top">Lampiran</td><td class="align-top">:</td><td class="pl-2">{{ $attachment }}</td></tr>
-                                <tr><td class="pr-6 py-0.5 align-top">Hal</td><td class="align-top">:</td><td class="pl-2"><b>Permohonan Praktik Kerja Lapangan (PKL)</b></td></tr>
+                                <tr><td class="pr-4 py-0.5 align-top">Nomor</td><td class="align-top">:</td><td class="pl-2">{{ $letterNumber }}</td></tr>
+                                <tr><td class="pr-4 py-0.5 align-top">Lampiran</td><td class="align-top">:</td><td class="pl-2">{{ $attachment }}</td></tr>
+                                <tr><td class="pr-4 py-0.5 align-top">Hal</td><td class="align-top">:</td><td class="pl-2"><b>Permohonan Praktik Kerja Lapangan (PKL)</b></td></tr>
                             </table>
                         </div>
                         <div>
@@ -178,74 +178,74 @@
                     </div>
 
                     <!-- Tujuan Surat -->
-                    <div class="text-[15px] mb-6 leading-relaxed">
+                    <div class="text-[14px] mb-4 leading-relaxed">
                         <p>Kepada Yth.</p>
                         <p><b>Pimpinan {{ $selectedPlacement->company_name }}</b></p>
                         <p>di Tempat</p>
                     </div>
 
                     <!-- Isi Surat -->
-                    <div class="text-[15px] text-justify mb-4 space-y-2 leading-relaxed">
+                    <div class="text-[14px] text-justify mb-3 space-y-1.5 leading-relaxed">
                         <p>Dengan hormat,</p>
-                        <p class="indent-10">Dalam rangka pelaksanaan kurikulum Sekolah Menengah Kejuruan (SMK) Al Mabrur Pejawaran, di mana setiap siswa diwajibkan untuk melaksanakan Praktik Kerja Lapangan (PKL) guna mengaplikasikan teori yang telah dipelajari di sekolah ke dalam dunia usaha/dunia industri secara langsung.</p>
-                        <p class="indent-10">Sehubungan dengan hal tersebut, kami memohon kesediaan Bapak/Ibu untuk dapat menerima siswa/siswi kami melaksanakan kegiatan PKL di instansi/perusahaan yang Bapak/Ibu pimpin. Adapun kegiatan PKL ini direncanakan akan berlangsung pada:</p>
+                        <p class="indent-8">Dalam rangka pelaksanaan kurikulum Sekolah Menengah Kejuruan (SMK) Al Mabrur Pejawaran, di mana setiap siswa diwajibkan untuk melaksanakan Praktik Kerja Lapangan (PKL) guna mengaplikasikan teori yang telah dipelajari di sekolah ke dalam dunia usaha/dunia industri secara langsung.</p>
+                        <p class="indent-8">Sehubungan dengan hal tersebut, kami memohon kesediaan Bapak/Ibu untuk dapat menerima siswa/siswi kami melaksanakan kegiatan PKL di instansi/perusahaan yang Bapak/Ibu pimpin. Adapun kegiatan PKL ini direncanakan akan berlangsung pada:</p>
                         
-                        <table class="ml-10 mb-2 mt-1">
+                        <table class="ml-8 mb-1.5 mt-1">
                             <tr>
-                                <td class="py-1 w-36">Tanggal Mulai</td>
-                                <td class="py-1 px-3">:</td>
-                                <td class="py-1 font-bold">{{ \Carbon\Carbon::parse($startDate)->translatedFormat('d F Y') }}</td>
+                                <td class="py-0.5 w-32">Tanggal Mulai</td>
+                                <td class="py-0.5 px-2">:</td>
+                                <td class="py-0.5 font-bold">{{ \Carbon\Carbon::parse($startDate)->translatedFormat('d F Y') }}</td>
                             </tr>
                             <tr>
-                                <td class="py-1 w-36">Tanggal Selesai</td>
-                                <td class="py-1 px-3">:</td>
-                                <td class="py-1 font-bold">{{ \Carbon\Carbon::parse($endDate)->translatedFormat('d F Y') }}</td>
+                                <td class="py-0.5 w-32">Tanggal Selesai</td>
+                                <td class="py-0.5 px-2">:</td>
+                                <td class="py-0.5 font-bold">{{ \Carbon\Carbon::parse($endDate)->translatedFormat('d F Y') }}</td>
                             </tr>
                         </table>
 
-                        <p class="indent-10">Adapun daftar nama siswa peserta PKL dan guru pembimbing yang ditugaskan pada instansi Bapak/Ibu adalah sebagai berikut:</p>
+                        <p class="indent-8">Adapun daftar nama siswa peserta PKL dan guru pembimbing yang ditugaskan pada instansi Bapak/Ibu adalah sebagai berikut:</p>
                     </div>
 
                     <!-- Tabel Siswa -->
-                    <div class="mb-6 pl-10 pr-4">
-                        <table class="w-full border-collapse border border-black text-[15px] text-left">
+                    <div class="mb-4 pl-8 pr-2">
+                        <table class="w-full border-collapse border border-black text-[14px] text-left">
                             <thead>
                                 <tr class="bg-gray-100 print:bg-transparent">
-                                    <th class="border border-black px-4 py-2 w-12 text-center">No</th>
-                                    <th class="border border-black px-4 py-2">Nama Siswa</th>
-                                    <th class="border border-black px-4 py-2 w-48">NIS</th>
+                                    <th class="border border-black px-3 py-1.5 w-10 text-center">No</th>
+                                    <th class="border border-black px-3 py-1.5">Nama Siswa</th>
+                                    <th class="border border-black px-3 py-1.5 w-40">NIS</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($selectedPlacement->students as $index => $student)
                                     <tr>
-                                        <td class="border border-black px-4 py-1.5 text-center">{{ $index + 1 }}</td>
-                                        <td class="border border-black px-4 py-1.5 font-bold">{{ $student->name }}</td>
-                                        <td class="border border-black px-4 py-1.5 font-mono text-sm">{{ $student->nis }}</td>
+                                        <td class="border border-black px-3 py-1 text-center">{{ $index + 1 }}</td>
+                                        <td class="border border-black px-3 py-1 font-bold">{{ $student->name }}</td>
+                                        <td class="border border-black px-3 py-1 font-mono text-sm">{{ $student->nis }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
 
-                    <div class="text-[15px] mb-6">
-                        <p class="mb-2"><b>Guru Pembimbing:</b></p>
-                        <p class="ml-10 flex items-center gap-3">
-                            <span class="w-16">Nama</span> <span>:</span> <span class="font-bold">{{ $selectedPlacement->teacher->name }}</span>
+                    <div class="text-[14px] mb-4">
+                        <p class="mb-1"><b>Guru Pembimbing:</b></p>
+                        <p class="ml-8 flex items-center gap-2">
+                            <span class="w-14">Nama</span> <span>:</span> <span class="font-bold">{{ $selectedPlacement->teacher->name }}</span>
                         </p>
-                        <p class="ml-10 flex items-center gap-3 mt-1">
-                            <span class="w-16">NIP</span> <span>:</span> <span>{{ $selectedPlacement->teacher->nip ?: '-' }}</span>
+                        <p class="ml-8 flex items-center gap-2 mt-0.5">
+                            <span class="w-14">NIP</span> <span>:</span> <span>{{ $selectedPlacement->teacher->nip ?: '-' }}</span>
                         </p>
                     </div>
 
-                    <div class="text-[15px] text-justify mb-8 leading-relaxed">
-                        <p class="indent-10">Demikian surat permohonan ini kami sampaikan. Atas perhatian dan kerja sama yang baik dari Bapak/Ibu, kami ucapkan terima kasih.</p>
+                    <div class="text-[14px] text-justify mb-6 leading-relaxed">
+                        <p class="indent-8">Demikian surat permohonan ini kami sampaikan. Atas perhatian dan kerja sama yang baik dari Bapak/Ibu, kami ucapkan terima kasih.</p>
                     </div>
 
                     <!-- Tanda Tangan -->
-                    <div class="flex justify-end text-[15px] text-center mt-8 pr-12">
+                    <div class="flex justify-end text-[14px] text-center mt-6 pr-8">
                         <div>
-                            <p class="mb-20">Kepala SMK Al Mabrur Pejawaran,</p>
+                            <p class="mb-16">Kepala SMK Al Mabrur Pejawaran,</p>
                             <p class="font-bold underline uppercase tracking-wide">{{ $headmasterName ?: '..........................................' }}</p>
                             <p class="mt-1">NIP. {{ $headmasterNip ?: '................................' }}</p>
                         </div>
