@@ -15,6 +15,28 @@
                         <h3 class="font-semibold text-lg mb-4 text-slate-800 dark:text-white">Pengaturan Surat</h3>
                         <div class="space-y-4">
                             <div>
+                                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Logo Kop Surat (Opsional)</label>
+                                <div class="flex items-center gap-3">
+                                    @if($logoPath)
+                                        <img src="{{ Storage::url($logoPath) }}" class="h-12 w-12 object-contain bg-white rounded border border-slate-200">
+                                        <button wire:click="removeLogo" class="text-xs text-red-500 hover:text-red-700">Hapus</button>
+                                    @else
+                                        <input type="file" wire:model="logoUpload" accept="image/*" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 dark:file:bg-violet-900/30 dark:file:text-violet-400">
+                                    @endif
+                                </div>
+                                <div wire:loading wire:target="logoUpload" class="text-xs text-violet-600 mt-1">Mengunggah...</div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Nomor Surat</label>
+                                    <input type="text" wire:model.live="letterNumber" class="w-full rounded-xl border-slate-200 shadow-sm focus:border-violet-500 focus:ring focus:ring-violet-500/20 dark:bg-slate-950 dark:border-slate-800 dark:text-white" placeholder="Nomor Surat">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Lampiran</label>
+                                    <input type="text" wire:model.live="attachment" class="w-full rounded-xl border-slate-200 shadow-sm focus:border-violet-500 focus:ring focus:ring-violet-500/20 dark:bg-slate-950 dark:border-slate-800 dark:text-white" placeholder="Lampiran">
+                                </div>
+                            </div>
+                            <div>
                                 <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Nama Kepala Sekolah</label>
                                 <input type="text" wire:model.live="headmasterName" class="w-full rounded-xl border-slate-200 shadow-sm focus:border-violet-500 focus:ring focus:ring-violet-500/20 dark:bg-slate-950 dark:border-slate-800 dark:text-white" placeholder="Nama Kepala Sekolah">
                             </div>
@@ -108,10 +130,13 @@
                     <!-- KOP SURAT -->
                     <div class="flex border-b-[3px] border-black pb-4 mb-1">
                         <div class="w-24 shrink-0 flex items-center justify-center">
-                            <!-- Placeholder logo (can be customized by user later) -->
-                            <div class="w-20 h-20 bg-slate-200 rounded-full flex items-center justify-center border border-slate-300 print:border-black">
-                                <span class="text-[10px] font-sans text-center text-slate-500 leading-tight">LOGO<br>SEKOLAH</span>
-                            </div>
+                            @if($logoPath)
+                                <img src="{{ Storage::url($logoPath) }}" class="max-w-[80px] max-h-[80px] object-contain">
+                            @else
+                                <div class="w-20 h-20 bg-slate-200 rounded-full flex items-center justify-center border border-slate-300 print:border-black">
+                                    <span class="text-[10px] font-sans text-center text-slate-500 leading-tight">LOGO<br>SEKOLAH</span>
+                                </div>
+                            @endif
                         </div>
                         <div class="flex-1 text-center pr-24 flex flex-col justify-center">
                             <h2 class="text-lg font-bold leading-tight">YAYASAN PENDIDIKAN AL MABRUR</h2>
@@ -126,8 +151,8 @@
                     <div class="flex justify-between text-[15px] mb-10">
                         <div>
                             <table class="border-none">
-                                <tr><td class="pr-6 py-0.5 align-top">Nomor</td><td class="align-top">:</td><td class="pl-2">... /SMK.AL/PKL/{{ date('Y') }}</td></tr>
-                                <tr><td class="pr-6 py-0.5 align-top">Lampiran</td><td class="align-top">:</td><td class="pl-2">1 (Satu) Berkas</td></tr>
+                                <tr><td class="pr-6 py-0.5 align-top">Nomor</td><td class="align-top">:</td><td class="pl-2">{{ $letterNumber }}</td></tr>
+                                <tr><td class="pr-6 py-0.5 align-top">Lampiran</td><td class="align-top">:</td><td class="pl-2">{{ $attachment }}</td></tr>
                                 <tr><td class="pr-6 py-0.5 align-top">Hal</td><td class="align-top">:</td><td class="pl-2"><b>Permohonan Praktik Kerja Lapangan (PKL)</b></td></tr>
                             </table>
                         </div>
