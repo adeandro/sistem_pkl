@@ -138,7 +138,7 @@
 
             <div class="flex-1 py-8 print:py-0">
                 <!-- A4 Paper Container -->
-                <div id="print-area" class="bg-white w-full max-w-[210mm] min-h-[297mm] mx-auto pt-[30mm] pr-[30mm] pb-[30mm] pl-[40mm] shadow-lg print:shadow-none text-black font-serif relative box-border">
+                <div id="print-area" class="bg-white w-full max-w-[210mm] min-h-[297mm] mx-auto pt-[20mm] pr-[20mm] pb-[30mm] pl-[30mm] shadow-lg print:shadow-none text-black font-serif relative box-border">
                     <!-- KOP SURAT -->
                     <div class="flex pb-2 mb-1">
                         <div class="w-28 shrink-0 flex items-center justify-center">
