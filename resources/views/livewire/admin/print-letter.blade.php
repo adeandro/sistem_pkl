@@ -122,26 +122,26 @@
                     margin: 0;
                     padding: 0;
                 }
-                @page { margin: 0; }
+                @page { margin: 3cm 3cm 3cm 4cm; }
             }
         </style>
         <div class="fixed inset-0 z-[100] bg-slate-100 dark:bg-slate-900 overflow-y-auto print:bg-white print:static print:overflow-visible flex flex-col">
             <div class="sticky top-0 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 p-4 flex justify-between items-center shadow-sm print:hidden z-10">
                 <div class="flex items-center gap-4">
-                    <button wire:click="closePrintPreview" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
-                        <svg class="w-5 h-5 text-slate-600 dark:text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                    <button wire:click="closePrintPreview" class="text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 transition-colors bg-slate-100 dark:bg-slate-800 p-2 rounded-full">
+                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                     </button>
                     <h3 class="font-bold text-slate-800 dark:text-white">Pratinjau Surat: {{ $selectedPlacement->company_name }}</h3>
                 </div>
-                <button onclick="window.print()" class="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl shadow-sm transition-colors font-medium flex items-center gap-2">
-                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                <button onclick="window.print()" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl shadow-sm hover:shadow-md transition-all duration-200 font-semibold text-sm flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
                     Cetak Surat
                 </button>
             </div>
 
             <div class="flex-1 py-8 print:py-0">
                 <!-- A4 Paper Container -->
-                <div id="print-area" class="bg-white w-full max-w-[210mm] min-h-[297mm] mx-auto p-[20mm] shadow-lg print:shadow-none print:p-0 text-black font-serif relative">
+                <div id="print-area" class="bg-white w-full max-w-[210mm] min-h-[297mm] mx-auto pt-[3cm] pr-[3cm] pb-[3cm] pl-[4cm] shadow-lg print:shadow-none print:p-0 text-black font-serif relative">
                     <!-- KOP SURAT -->
                     <div class="flex pb-3 mb-1">
                         <div class="w-32 shrink-0 flex items-center justify-center">
@@ -161,10 +161,10 @@
                         </div>
                     </div>
                     <div class="border-b-[4px] border-black mb-1"></div>
-                    <div class="border-b border-black mb-8"></div>
+                    <div class="border-b border-black mb-6"></div>
 
                     <!-- Nomor Surat dll -->
-                    <div class="flex justify-between text-[15px] mb-10">
+                    <div class="flex justify-between text-[15px] mb-6">
                         <div>
                             <table class="border-none">
                                 <tr><td class="pr-6 py-0.5 align-top">Nomor</td><td class="align-top">:</td><td class="pl-2">{{ $letterNumber }}</td></tr>
@@ -178,28 +178,28 @@
                     </div>
 
                     <!-- Tujuan Surat -->
-                    <div class="text-[15px] mb-8 leading-relaxed">
+                    <div class="text-[15px] mb-6 leading-relaxed">
                         <p>Kepada Yth.</p>
                         <p><b>Pimpinan {{ $selectedPlacement->company_name }}</b></p>
                         <p>di Tempat</p>
                     </div>
 
                     <!-- Isi Surat -->
-                    <div class="text-[15px] text-justify mb-6 space-y-3 leading-relaxed">
+                    <div class="text-[15px] text-justify mb-4 space-y-2 leading-relaxed">
                         <p>Dengan hormat,</p>
                         <p class="indent-10">Dalam rangka pelaksanaan kurikulum Sekolah Menengah Kejuruan (SMK) Al Mabrur Pejawaran, di mana setiap siswa diwajibkan untuk melaksanakan Praktik Kerja Lapangan (PKL) guna mengaplikasikan teori yang telah dipelajari di sekolah ke dalam dunia usaha/dunia industri secara langsung.</p>
                         <p class="indent-10">Sehubungan dengan hal tersebut, kami memohon kesediaan Bapak/Ibu untuk dapat menerima siswa/siswi kami melaksanakan kegiatan PKL di instansi/perusahaan yang Bapak/Ibu pimpin. Adapun kegiatan PKL ini direncanakan akan berlangsung pada:</p>
                         
-                        <table class="ml-10 mb-4 mt-2">
+                        <table class="ml-10 mb-2 mt-1">
                             <tr>
-                                <td class="py-1.5 w-36">Tanggal Mulai</td>
-                                <td class="py-1.5 px-3">:</td>
-                                <td class="py-1.5 font-bold">{{ \Carbon\Carbon::parse($startDate)->translatedFormat('d F Y') }}</td>
+                                <td class="py-1 w-36">Tanggal Mulai</td>
+                                <td class="py-1 px-3">:</td>
+                                <td class="py-1 font-bold">{{ \Carbon\Carbon::parse($startDate)->translatedFormat('d F Y') }}</td>
                             </tr>
                             <tr>
-                                <td class="py-1.5 w-36">Tanggal Selesai</td>
-                                <td class="py-1.5 px-3">:</td>
-                                <td class="py-1.5 font-bold">{{ \Carbon\Carbon::parse($endDate)->translatedFormat('d F Y') }}</td>
+                                <td class="py-1 w-36">Tanggal Selesai</td>
+                                <td class="py-1 px-3">:</td>
+                                <td class="py-1 font-bold">{{ \Carbon\Carbon::parse($endDate)->translatedFormat('d F Y') }}</td>
                             </tr>
                         </table>
 
@@ -207,7 +207,7 @@
                     </div>
 
                     <!-- Tabel Siswa -->
-                    <div class="mb-8 pl-10 pr-4">
+                    <div class="mb-6 pl-10 pr-4">
                         <table class="w-full border-collapse border border-black text-[15px] text-left">
                             <thead>
                                 <tr class="bg-gray-100 print:bg-transparent">
@@ -219,16 +219,16 @@
                             <tbody>
                                 @foreach($selectedPlacement->students as $index => $student)
                                     <tr>
-                                        <td class="border border-black px-4 py-2 text-center">{{ $index + 1 }}</td>
-                                        <td class="border border-black px-4 py-2 font-bold">{{ $student->name }}</td>
-                                        <td class="border border-black px-4 py-2 font-mono text-sm">{{ $student->nis }}</td>
+                                        <td class="border border-black px-4 py-1.5 text-center">{{ $index + 1 }}</td>
+                                        <td class="border border-black px-4 py-1.5 font-bold">{{ $student->name }}</td>
+                                        <td class="border border-black px-4 py-1.5 font-mono text-sm">{{ $student->nis }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
 
-                    <div class="text-[15px] mb-12">
+                    <div class="text-[15px] mb-6">
                         <p class="mb-2"><b>Guru Pembimbing:</b></p>
                         <p class="ml-10 flex items-center gap-3">
                             <span class="w-16">Nama</span> <span>:</span> <span class="font-bold">{{ $selectedPlacement->teacher->name }}</span>
@@ -238,14 +238,14 @@
                         </p>
                     </div>
 
-                    <div class="text-[15px] text-justify mb-16 leading-relaxed">
+                    <div class="text-[15px] text-justify mb-8 leading-relaxed">
                         <p class="indent-10">Demikian surat permohonan ini kami sampaikan. Atas perhatian dan kerja sama yang baik dari Bapak/Ibu, kami ucapkan terima kasih.</p>
                     </div>
 
                     <!-- Tanda Tangan -->
-                    <div class="flex justify-end text-[15px] text-center mt-12 pr-12">
+                    <div class="flex justify-end text-[15px] text-center mt-8 pr-12">
                         <div>
-                            <p class="mb-24">Kepala SMK Al Mabrur Pejawaran,</p>
+                            <p class="mb-20">Kepala SMK Al Mabrur Pejawaran,</p>
                             <p class="font-bold underline uppercase tracking-wide">{{ $headmasterName ?: '..........................................' }}</p>
                             <p class="mt-1">NIP. {{ $headmasterNip ?: '................................' }}</p>
                         </div>
