@@ -40,6 +40,19 @@ new class extends Component {
         }
     }
 
+    public function removeStudent($studentId, $placementId)
+    {
+        DB::transaction(function () use ($studentId, $placementId) {
+            $placement = Placement::find($placementId);
+            $student = Student::find($studentId);
+            
+            if ($placement && $student) {
+                $placement->students()->detach($student->id);
+                $student->update(['is_assigned' => false]);
+            }
+        });
+    }
+
     public function exportExcel()
     {
         return redirect()->route('admin.export');
