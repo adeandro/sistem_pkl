@@ -110,6 +110,21 @@
 
     <!-- Print Preview Modal / Fullscreen -->
     @if($selectedPlacement)
+        <style>
+            @media print {
+                body * { visibility: hidden; }
+                #print-area, #print-area * { visibility: visible; }
+                #print-area {
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    margin: 0;
+                    padding: 0;
+                }
+                @page { margin: 0; }
+            }
+        </style>
         <div class="fixed inset-0 z-[100] bg-slate-100 dark:bg-slate-900 overflow-y-auto print:bg-white print:static print:overflow-visible flex flex-col">
             <div class="sticky top-0 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 p-4 flex justify-between items-center shadow-sm print:hidden z-10">
                 <div class="flex items-center gap-4">
@@ -126,7 +141,7 @@
 
             <div class="flex-1 py-8 print:py-0">
                 <!-- A4 Paper Container -->
-                <div class="bg-white w-full max-w-[210mm] min-h-[297mm] mx-auto p-[20mm] shadow-lg print:shadow-none print:p-0 text-black font-serif relative">
+                <div id="print-area" class="bg-white w-full max-w-[210mm] min-h-[297mm] mx-auto p-[20mm] shadow-lg print:shadow-none print:p-0 text-black font-serif relative">
                     <!-- KOP SURAT -->
                     <div class="flex pb-3 mb-1">
                         <div class="w-32 shrink-0 flex items-center justify-center">

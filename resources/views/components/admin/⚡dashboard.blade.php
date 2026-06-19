@@ -134,7 +134,7 @@ new class extends Component {
                                     @foreach($placement->students as $student)
                                         <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-medium text-slate-700 dark:text-slate-300">
                                             <span>{{ $student->name }}</span>
-                                            <button wire:click="removeStudent({{ $student->id }}, {{ $placement->id }})" class="text-slate-400 hover:text-red-500 transition-colors p-0.5 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700">
+                                            <button onclick="confirm('Yakin ingin mengeluarkan siswa ini dari kelompok?') || event.stopImmediatePropagation()" wire:click="removeStudent({{ $student->id }}, {{ $placement->id }})" class="text-slate-400 hover:text-red-500 transition-colors p-0.5 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700">
                                                 <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                                             </button>
                                         </div>

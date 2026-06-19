@@ -15,7 +15,7 @@ new class extends Component {
     public function with()
     {
         return [
-            'placements' => Placement::with('students')->orderBy('company_name')->get(),
+            'placements' => Placement::with(['students', 'teacher'])->orderBy('company_name')->get(),
         ];
     }
 }; ?>
@@ -73,14 +73,22 @@ new class extends Component {
                     @endif
                 </div>
 
-                @if(!$isFull)
                 <div class="mt-4 pt-4 border-t border-slate-200 dark:border-slate-800/60">
-                    <button onclick="Livewire.dispatch('openStudentJoinModal', { placementId: {{ $placement->id }}, placementName: '{{ addslashes($placement->company_name) }}' })" style="color: #7c3aed; border-color: #c4b5fd; background-color: #f5f3ff;" class="w-full py-2.5 border rounded-xl shadow-sm hover:opacity-80 transition-colors font-medium text-sm flex items-center justify-center gap-2 dark:bg-violet-900/20 dark:border-violet-800/50 dark:text-violet-400">
-                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
-                        Bergabung ke Kelompok
-                    </button>
+                    <div class="mb-3 flex items-center gap-2">
+                        <span class="text-xs text-slate-500 font-medium">Guru Pembimbing:</span>
+                        @if($placement->teacher)
+                            <span class="text-xs font-semibold text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-500/10 px-2 py-0.5 rounded-md">{{ $placement->teacher->name }}</span>
+                        @else
+                            <span class="text-xs italic text-slate-400">Belum ditugaskan</span>
+                        @endif
+                    </div>
+                    @if(!$isFull)
+                        <button onclick="Livewire.dispatch('openStudentJoinModal', { placementId: {{ $placement->id }}, placementName: '{{ addslashes($placement->company_name) }}' })" style="color: #7c3aed; border-color: #c4b5fd; background-color: #f5f3ff;" class="w-full py-2.5 border rounded-xl shadow-sm hover:opacity-80 transition-colors font-medium text-sm flex items-center justify-center gap-2 dark:bg-violet-900/20 dark:border-violet-800/50 dark:text-violet-400">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
+                            Bergabung ke Kelompok
+                        </button>
+                    @endif
                 </div>
-                @endif
             </div>
         </div>
     @endforeach
