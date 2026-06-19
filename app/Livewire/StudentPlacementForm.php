@@ -92,7 +92,7 @@ class StudentPlacementForm extends Component
         try {
             $placement = Placement::firstOrCreate(
                 ['company_name' => trim($this->companyName)],
-                ['quota' => null]
+                ['quota' => 3]
             );
 
             if (!is_null($placement->quota)) {
