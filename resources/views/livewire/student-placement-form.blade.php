@@ -1,7 +1,7 @@
 <div>
     @if($showModal)
         <!-- Modal Backdrop -->
-        <div class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 dark:bg-black/60 backdrop-blur-sm p-4 overflow-y-auto">
+        <div style="background-color: rgba(15, 23, 42, 0.7); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);" class="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
             <!-- Modal Content -->
             <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl w-full max-w-lg border border-slate-200/60 dark:border-slate-800 flex flex-col relative my-auto">
                 
