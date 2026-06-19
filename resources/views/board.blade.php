@@ -26,5 +26,6 @@
         
         <livewire:pkl-board />
         <livewire:student-placement-form />
+        <livewire:student-join-form />
     </div>
 </x-layouts::student>

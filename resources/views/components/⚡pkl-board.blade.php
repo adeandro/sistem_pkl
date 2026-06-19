@@ -50,25 +50,36 @@ new class extends Component {
                 </div>
             </div>
             
-            <div class="p-5 flex-1 bg-slate-50/30 dark:bg-slate-900/30">
-                @if($placement->students->isEmpty())
-                    <div class="h-full flex items-center justify-center py-6 text-slate-400 dark:text-slate-500 italic text-sm">
-                        Belum ada siswa terdaftar
-                    </div>
-                @else
-                    <div class="grid grid-cols-1 gap-2.5">
-                        @foreach($placement->students as $student)
-                            <div class="flex items-center gap-3 p-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700/60 shadow-sm hover:border-violet-200 dark:hover:border-violet-700/50 transition-colors group/item cursor-default">
-                                <div class="w-8 h-8 rounded-full bg-violet-50 dark:bg-violet-500/10 flex items-center justify-center text-violet-600 dark:text-violet-400 shrink-0 group-hover/item:scale-110 transition-transform duration-300">
-                                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+            <div class="p-5 flex-1 bg-slate-50/30 dark:bg-slate-900/30 flex flex-col justify-between">
+                <div>
+                    @if($placement->students->isEmpty())
+                        <div class="h-full flex items-center justify-center py-6 text-slate-400 dark:text-slate-500 italic text-sm">
+                            Belum ada siswa terdaftar
+                        </div>
+                    @else
+                        <div class="grid grid-cols-1 gap-2.5">
+                            @foreach($placement->students as $student)
+                                <div class="flex items-center gap-3 p-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700/60 shadow-sm hover:border-violet-200 dark:hover:border-violet-700/50 transition-colors group/item cursor-default">
+                                    <div class="w-8 h-8 rounded-full bg-violet-50 dark:bg-violet-500/10 flex items-center justify-center text-violet-600 dark:text-violet-400 shrink-0 group-hover/item:scale-110 transition-transform duration-300">
+                                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                                    </div>
+                                    <div class="flex flex-col overflow-hidden">
+                                        <span class="text-sm font-medium text-slate-800 dark:text-slate-200 truncate group-hover/item:text-violet-600 dark:group-hover/item:text-violet-400 transition-colors">{{ $student->name }}</span>
+                                        <span class="text-[11px] text-slate-500 dark:text-slate-400 font-mono">{{ $student->nis }}</span>
+                                    </div>
                                 </div>
-                                <div class="flex flex-col overflow-hidden">
-                                    <span class="text-sm font-medium text-slate-800 dark:text-slate-200 truncate group-hover/item:text-violet-600 dark:group-hover/item:text-violet-400 transition-colors">{{ $student->name }}</span>
-                                    <span class="text-[11px] text-slate-500 dark:text-slate-400 font-mono">{{ $student->nis }}</span>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+
+                @if(!$isFull)
+                <div class="mt-4 pt-4 border-t border-slate-200 dark:border-slate-800/60">
+                    <button onclick="Livewire.dispatch('openStudentJoinModal', { placementId: {{ $placement->id }}, placementName: '{{ addslashes($placement->company_name) }}' })" style="color: #7c3aed; border-color: #c4b5fd; background-color: #f5f3ff;" class="w-full py-2.5 border rounded-xl shadow-sm hover:opacity-80 transition-colors font-medium text-sm flex items-center justify-center gap-2 dark:bg-violet-900/20 dark:border-violet-800/50 dark:text-violet-400">
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
+                        Bergabung ke Kelompok
+                    </button>
+                </div>
                 @endif
             </div>
         </div>
