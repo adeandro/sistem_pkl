@@ -118,9 +118,6 @@
                     position: absolute;
                     left: 0;
                     top: 0;
-                    width: 100%;
-                    margin: 0;
-                    padding: 0;
                 }
                 @page { size: A4 portrait; margin: 0; }
             }
