@@ -2,8 +2,16 @@
 
 use Livewire\Component;
 use App\Models\Placement;
+use Livewire\Attributes\On;
 
 new class extends Component {
+    
+    #[On('placementCreated')]
+    public function refreshBoard()
+    {
+        // automatically re-renders
+    }
+
     public function with()
     {
         return [
