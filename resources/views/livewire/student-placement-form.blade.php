@@ -60,7 +60,7 @@
                                     <span class="text-xs font-semibold px-2 py-0.5 bg-slate-100 dark:bg-slate-800 rounded-md text-slate-600 dark:text-slate-400">{{ count($selectedStudents) }} terpilih</span>
                                 </label>
                                 <!-- Height optimized to prevent overflowing modal on small screens -->
-                                <div class="max-h-32 overflow-y-auto border border-slate-200 dark:border-slate-800 rounded-xl p-2 bg-slate-50/50 dark:bg-slate-950/30 relative">
+                                <div style="max-height: 180px; overflow-y: auto;" class="border border-slate-200 dark:border-slate-800 rounded-xl p-2 bg-slate-50/50 dark:bg-slate-950/30 relative">
                                     @if($availableStudents->isEmpty())
                                         <div class="text-sm text-slate-500 italic p-4 text-center">Semua siswa lain sudah mendapatkan kelompok.</div>
                                     @else
