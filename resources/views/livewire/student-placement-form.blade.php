@@ -85,8 +85,11 @@
                                 @error('selectedStudents') <span class="text-sm text-red-500 mt-2 block font-medium">{{ $message }}</span> @enderror
                             </div>
 
-                            <div class="pt-4 border-t border-slate-100 dark:border-slate-800/60 animate-in fade-in slide-in-from-bottom-4 duration-300">
-                                <button type="submit" class="w-full px-5 py-3 bg-violet-600 text-white rounded-xl shadow-sm hover:bg-violet-700 hover:shadow-md transition-all duration-200 font-semibold active:scale-[0.98] flex justify-center items-center gap-2" wire:loading.attr="disabled">
+                            <div class="pt-4 flex gap-3 border-t border-slate-100 dark:border-slate-800/60 animate-in fade-in slide-in-from-bottom-4 duration-300">
+                                <button type="button" wire:click="closeModal" class="px-5 py-3 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors font-semibold text-sm">
+                                    Batal
+                                </button>
+                                <button type="submit" style="background-color: #7c3aed; color: #ffffff;" class="flex-1 px-5 py-3 rounded-xl shadow-sm hover:opacity-90 hover:shadow-md transition-all duration-200 font-semibold active:scale-[0.98] flex justify-center items-center gap-2" wire:loading.attr="disabled">
                                     <span wire:loading.remove wire:target="submit">Simpan & Daftarkan Kelompok</span>
                                     <svg wire:loading wire:target="submit" class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                                     <span wire:loading wire:target="submit">Memproses...</span>
