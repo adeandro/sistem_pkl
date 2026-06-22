@@ -22,6 +22,7 @@ class PrintLetter extends Component
     public $logoPath;
 
     public $selectedPlacementId = null;
+    public $isBatchPrint = false;
 
     public function mount()
     {
@@ -64,21 +65,38 @@ class PrintLetter extends Component
     public function selectPlacementToPrint($id)
     {
         $this->selectedPlacementId = $id;
+        $this->isBatchPrint = false;
+    }
+
+    public function selectAllToPrint()
+    {
+        $this->isBatchPrint = true;
+        $this->selectedPlacementId = null;
     }
 
     public function closePrintPreview()
     {
         $this->selectedPlacementId = null;
+        $this->isBatchPrint = false;
     }
 
     public function render()
     {
         $placements = Placement::with(['students', 'teacher'])->orderBy('company_name')->get();
-        $selectedPlacement = $this->selectedPlacementId ? Placement::with(['students', 'teacher'])->find($this->selectedPlacementId) : null;
+        
+        $placementsToPrint = collect();
+        if ($this->selectedPlacementId) {
+            $p = Placement::with(['students', 'teacher'])->find($this->selectedPlacementId);
+            if ($p) $placementsToPrint->push($p);
+        } elseif ($this->isBatchPrint) {
+            $placementsToPrint = $placements->filter(function($p) {
+                return $p->students->count() > 0 && ($this->letterType === 'permohonan' || $p->teacher);
+            });
+        }
 
         return view('livewire.admin.print-letter', [
             'placements' => $placements,
-            'selectedPlacement' => $selectedPlacement,
+            'placementsToPrint' => $placementsToPrint,
         ])->layout('layouts.app', ['title' => 'Cetak Surat PKL']);
     }
 }
