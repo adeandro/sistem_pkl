@@ -52,6 +52,18 @@
                                 <input type="text" wire:model.live="headmasterNip" class="w-full rounded-xl border-slate-200 shadow-sm focus:border-violet-500 focus:ring focus:ring-violet-500/20 dark:bg-slate-950 dark:border-slate-800 dark:text-white" placeholder="NIP">
                             </div>
                             <div>
+                                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Tanda Tangan Kepala Sekolah (Opsional)</label>
+                                <div class="flex items-center gap-3">
+                                    @if($signaturePath)
+                                        <img src="{{ Storage::url($signaturePath) }}" class="h-12 object-contain bg-white rounded border border-slate-200">
+                                        <button wire:click="removeSignature" class="text-xs text-red-500 hover:text-red-700">Hapus</button>
+                                    @else
+                                        <input type="file" wire:model="signatureUpload" accept="image/*" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100 dark:file:bg-violet-900/30 dark:file:text-violet-400">
+                                    @endif
+                                </div>
+                                <div wire:loading wire:target="signatureUpload" class="text-xs text-violet-600 mt-1">Mengunggah...</div>
+                            </div>
+                            <div>
                                 <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Tanggal Mulai PKL</label>
                                 <input type="date" wire:model.live="startDate" class="w-full rounded-xl border-slate-200 shadow-sm focus:border-violet-500 focus:ring focus:ring-violet-500/20 dark:bg-slate-950 dark:border-slate-800 dark:text-white">
                             </div>
@@ -273,8 +285,13 @@
 
                         <!-- Tanda Tangan -->
                         <div class="flex justify-end text-[14px] text-center mt-6 pr-8">
-                            <div>
-                                <p class="mb-16">Kepala SMK Al Mabrur Pejawaran,</p>
+                            <div class="flex flex-col items-center">
+                                <p class="mb-1">Kepala SMK Al Mabrur Pejawaran,</p>
+                                @if($signaturePath)
+                                    <img src="{{ Storage::url($signaturePath) }}" class="h-16 object-contain mix-blend-darken my-2">
+                                @else
+                                    <div class="h-20"></div>
+                                @endif
                                 <p class="font-bold underline uppercase tracking-wide">{{ $headmasterName ?: '..........................................' }}</p>
                                 <p class="mt-1">NIP. {{ $headmasterNip ?: '................................' }}</p>
                             </div>

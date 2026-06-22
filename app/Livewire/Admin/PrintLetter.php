@@ -21,6 +21,9 @@ class PrintLetter extends Component
     public $logoUpload;
     public $logoPath;
 
+    public $signatureUpload;
+    public $signaturePath;
+
     public $selectedPlacementId = null;
     public $isBatchPrint = false;
 
@@ -35,6 +38,7 @@ class PrintLetter extends Component
         $this->attachment = session('print_attachment', '1 (Satu) Berkas');
         $this->letterType = session('print_letter_type', 'permohonan');
         $this->logoPath = session('print_logo_path', '');
+        $this->signaturePath = session('print_signature_path', '');
     }
 
     public function updated($propertyName)
@@ -60,6 +64,24 @@ class PrintLetter extends Component
         $this->logoPath = '';
         $this->logoUpload = null;
         session(['print_logo_path' => '']);
+    }
+
+    public function updatedSignatureUpload()
+    {
+        $this->validate([
+            'signatureUpload' => 'image|max:1024', // 1MB Max
+        ]);
+
+        $path = $this->signatureUpload->store('signatures', 'public');
+        $this->signaturePath = $path;
+        session(['print_signature_path' => $path]);
+    }
+
+    public function removeSignature()
+    {
+        $this->signaturePath = '';
+        $this->signatureUpload = null;
+        session(['print_signature_path' => '']);
     }
 
     public function selectPlacementToPrint($id)
