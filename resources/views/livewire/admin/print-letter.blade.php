@@ -168,7 +168,7 @@
             <div class="flex-1 py-8 print:py-0">
                 @foreach($placementsToPrint as $selectedPlacement)
                     <!-- A4 Paper Container -->
-                    <div class="bg-white w-full max-w-[210mm] min-h-[297mm] mx-auto pt-[10mm] pr-[10mm] pb-[10mm] pl-[20mm] shadow-lg print:shadow-none text-black font-serif relative box-border print:break-after-page mb-8 print:mb-0">
+                    <div style="font-family: 'Times New Roman', Times, serif;" class="bg-white w-full max-w-[210mm] min-h-[297mm] mx-auto pt-[10mm] pr-[10mm] pb-[10mm] pl-[20mm] shadow-lg print:shadow-none text-black relative box-border print:break-after-page mb-8 print:mb-0">
                         <!-- KOP SURAT -->
                         <div class="flex pb-2 mb-1">
                             <div class="w-28 shrink-0 flex items-center justify-center">
@@ -176,15 +176,15 @@
                                     <img src="{{ Storage::url($logoPath) }}" class="w-20 h-20 object-contain">
                                 @else
                                     <div class="w-20 h-20 bg-slate-200 flex items-center justify-center border border-slate-300 print:border-black">
-                                        <span class="text-[10px] font-sans text-center text-slate-500 leading-tight">LOGO<br>SEKOLAH</span>
+                                        <span class="text-[10px] text-center text-slate-500 leading-tight">LOGO<br>SEKOLAH</span>
                                     </div>
                                 @endif
                             </div>
-                            <div class="flex-1 text-center pr-6 flex flex-col justify-center font-sans">
+                            <div class="flex-1 text-center pr-6 flex flex-col justify-center">
                                 <h2 class="text-[14px] leading-tight mb-0.5 text-black">YAYASAN PERSAUDARAAN HAJI AL MABRUR (YPHA)</h2>
                                 <h1 class="text-[22px] font-bold leading-tight uppercase tracking-wide text-black">SMK AL MABRUR PEJAWARAN</h1>
                                 <p class="text-[13px] mt-1 text-black">Pon Pes Al Mabrur Rt 13 Rw 03 Gembol, Pejawaran, Banjarnegara 53454</p>
-                                <p class="text-[13px] text-black mt-0.5">Website: <span class="text-blue-700 underline">www.almabrur.net</span> | email: smkalmabrur@gmail.com</p>
+                                <p class="text-[13px] text-black mt-0.5">Website: <span class="text-blue-700 underline">https://smkalmabrur.sch.id/</span> | email: smkalmabrur@gmail.com</p>
                             </div>
                         </div>
                         <div class="border-b-[4px] border-black mb-1"></div>
@@ -200,7 +200,7 @@
                                 </table>
                             </div>
                             <div>
-                                <p>Pejawaran, {{ date('d F Y') }}</p>
+                                <p>Pejawaran, {{ \Carbon\Carbon::now()->locale('id')->translatedFormat('d F Y') }}</p>
                             </div>
                         </div>
 
@@ -225,12 +225,12 @@
                                 <tr>
                                     <td class="py-0.5 w-32">Tanggal Mulai</td>
                                     <td class="py-0.5 px-2">:</td>
-                                    <td class="py-0.5 font-bold">{{ \Carbon\Carbon::parse($startDate)->translatedFormat('d F Y') }}</td>
+                                    <td class="py-0.5 font-bold">{{ \Carbon\Carbon::parse($startDate)->locale('id')->translatedFormat('d F Y') }}</td>
                                 </tr>
                                 <tr>
                                     <td class="py-0.5 w-32">Tanggal Selesai</td>
                                     <td class="py-0.5 px-2">:</td>
-                                    <td class="py-0.5 font-bold">{{ \Carbon\Carbon::parse($endDate)->translatedFormat('d F Y') }}</td>
+                                    <td class="py-0.5 font-bold">{{ \Carbon\Carbon::parse($endDate)->locale('id')->translatedFormat('d F Y') }}</td>
                                 </tr>
                             </table>
 
