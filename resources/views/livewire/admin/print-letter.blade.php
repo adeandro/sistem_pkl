@@ -211,7 +211,11 @@
                             </tr>
                         </table>
 
-                        <p class="indent-8">Adapun daftar nama siswa peserta PKL dan guru pembimbing yang ditugaskan pada instansi Bapak/Ibu adalah sebagai berikut:</p>
+                        @if($letterType === 'permohonan')
+                            <p class="indent-8">Adapun daftar nama siswa calon peserta PKL pada instansi Bapak/Ibu adalah sebagai berikut:</p>
+                        @else
+                            <p class="indent-8">Adapun daftar nama siswa peserta PKL dan guru pembimbing yang ditugaskan pada instansi Bapak/Ibu adalah sebagai berikut:</p>
+                        @endif
                     </div>
 
                     <!-- Tabel Siswa -->
@@ -236,15 +240,17 @@
                         </table>
                     </div>
 
-                    <div class="text-[14px] mb-4">
-                        <p class="mb-1"><b>Guru Pembimbing:</b></p>
-                        <p class="ml-8 flex items-center gap-2">
-                            <span class="w-14">Nama</span> <span>:</span> <span class="font-bold">{{ $selectedPlacement->teacher->name }}</span>
-                        </p>
-                        <p class="ml-8 flex items-center gap-2 mt-0.5">
-                            <span class="w-14">NIP</span> <span>:</span> <span>{{ $selectedPlacement->teacher->nip ?: '-' }}</span>
-                        </p>
-                    </div>
+                    @if($letterType === 'pengantar')
+                        <div class="text-[14px] mb-4">
+                            <p class="mb-1"><b>Guru Pembimbing:</b></p>
+                            <p class="ml-8 flex items-center gap-2">
+                                <span class="w-14">Nama</span> <span>:</span> <span class="font-bold">{{ $selectedPlacement->teacher->name }}</span>
+                            </p>
+                            <p class="ml-8 flex items-center gap-2 mt-0.5">
+                                <span class="w-14">NIP</span> <span>:</span> <span>{{ $selectedPlacement->teacher->nip ?: '-' }}</span>
+                            </p>
+                        </div>
+                    @endif
 
                     <div class="text-[14px] text-justify mb-6 leading-relaxed">
                         @if($letterType === 'permohonan')
