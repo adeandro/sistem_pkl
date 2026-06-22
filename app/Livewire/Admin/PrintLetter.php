@@ -16,6 +16,7 @@ class PrintLetter extends Component
     public $headmasterNip;
     public $letterNumber;
     public $attachment;
+    public $letterType;
     
     public $logoUpload;
     public $logoPath;
@@ -31,12 +32,13 @@ class PrintLetter extends Component
         $this->headmasterNip = session('print_headmaster_nip', '');
         $this->letterNumber = session('print_letter_number', '... /SMK.AL/PKL/' . date('Y'));
         $this->attachment = session('print_attachment', '1 (Satu) Berkas');
+        $this->letterType = session('print_letter_type', 'permohonan');
         $this->logoPath = session('print_logo_path', '');
     }
 
     public function updated($propertyName)
     {
-        if (in_array($propertyName, ['startDate', 'endDate', 'headmasterName', 'headmasterNip', 'letterNumber', 'attachment'])) {
+        if (in_array($propertyName, ['startDate', 'endDate', 'headmasterName', 'headmasterNip', 'letterNumber', 'attachment', 'letterType'])) {
             session(['print_' . \Illuminate\Support\Str::snake($propertyName) => $this->$propertyName]);
         }
     }
@@ -77,6 +79,6 @@ class PrintLetter extends Component
         return view('livewire.admin.print-letter', [
             'placements' => $placements,
             'selectedPlacement' => $selectedPlacement,
-        ])->layout('layouts.app', ['title' => 'Cetak Surat Pengantar']);
+        ])->layout('layouts.app', ['title' => 'Cetak Surat PKL']);
     }
 }

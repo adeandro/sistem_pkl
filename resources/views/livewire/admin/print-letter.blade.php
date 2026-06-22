@@ -3,7 +3,7 @@
         <div class="space-y-6">
             <div class="flex justify-between items-center">
                 <div>
-                    <h2 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Cetak Surat Pengantar</h2>
+                    <h2 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Cetak Surat PKL</h2>
                     <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Pengaturan format surat dan daftar kelompok untuk dicetak.</p>
                 </div>
             </div>
@@ -25,6 +25,13 @@
                                     @endif
                                 </div>
                                 <div wire:loading wire:target="logoUpload" class="text-xs text-violet-600 mt-1">Mengunggah...</div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Jenis Surat</label>
+                                <select wire:model.live="letterType" class="w-full rounded-xl border-slate-200 shadow-sm focus:border-violet-500 focus:ring focus:ring-violet-500/20 dark:bg-slate-950 dark:border-slate-800 dark:text-white">
+                                    <option value="permohonan">Surat Permohonan Izin PKL</option>
+                                    <option value="pengantar">Surat Pengantar / Penyerahan Siswa</option>
+                                </select>
                             </div>
                             <div class="grid grid-cols-2 gap-3">
                                 <div>
@@ -166,7 +173,7 @@
                             <table class="border-none">
                                 <tr><td class="pr-4 py-0.5 align-top">Nomor</td><td class="align-top">:</td><td class="pl-2">{{ $letterNumber }}</td></tr>
                                 <tr><td class="pr-4 py-0.5 align-top">Lampiran</td><td class="align-top">:</td><td class="pl-2">{{ $attachment }}</td></tr>
-                                <tr><td class="pr-4 py-0.5 align-top">Hal</td><td class="align-top">:</td><td class="pl-2"><b>Permohonan Praktik Kerja Lapangan (PKL)</b></td></tr>
+                                <tr><td class="pr-4 py-0.5 align-top">Hal</td><td class="align-top">:</td><td class="pl-2"><b>{{ $letterType === 'permohonan' ? 'Permohonan Praktik Kerja Lapangan (PKL)' : 'Penyerahan Siswa Praktik Kerja Lapangan (PKL)' }}</b></td></tr>
                             </table>
                         </div>
                         <div>
@@ -185,7 +192,11 @@
                     <div class="text-[14px] text-justify mb-3 space-y-1.5 leading-relaxed">
                         <p>Dengan hormat,</p>
                         <p class="indent-8">Dalam rangka pelaksanaan kurikulum Sekolah Menengah Kejuruan (SMK) Al Mabrur Pejawaran, di mana setiap siswa diwajibkan untuk melaksanakan Praktik Kerja Lapangan (PKL) guna mengaplikasikan teori yang telah dipelajari di sekolah ke dalam dunia usaha/dunia industri secara langsung.</p>
-                        <p class="indent-8">Sehubungan dengan hal tersebut, kami memohon kesediaan Bapak/Ibu untuk dapat menerima siswa/siswi kami melaksanakan kegiatan PKL di instansi/perusahaan yang Bapak/Ibu pimpin. Adapun kegiatan PKL ini direncanakan akan berlangsung pada:</p>
+                        @if($letterType === 'permohonan')
+                            <p class="indent-8">Sehubungan dengan hal tersebut, kami memohon kesediaan Bapak/Ibu untuk dapat menerima siswa/siswi kami melaksanakan kegiatan PKL di instansi/perusahaan yang Bapak/Ibu pimpin. Adapun kegiatan PKL ini direncanakan akan berlangsung pada:</p>
+                        @else
+                            <p class="indent-8">Sehubungan dengan hal tersebut, bersama surat ini kami mengantarkan dan menyerahkan siswa/siswi kami untuk melaksanakan kegiatan PKL di instansi/perusahaan yang Bapak/Ibu pimpin. Adapun kegiatan PKL ini dilaksanakan pada:</p>
+                        @endif
                         
                         <table class="ml-8 mb-1.5 mt-1">
                             <tr>
@@ -236,7 +247,11 @@
                     </div>
 
                     <div class="text-[14px] text-justify mb-6 leading-relaxed">
-                        <p class="indent-8">Demikian surat permohonan ini kami sampaikan. Atas perhatian dan kerja sama yang baik dari Bapak/Ibu, kami ucapkan terima kasih.</p>
+                        @if($letterType === 'permohonan')
+                            <p class="indent-8">Demikian surat permohonan ini kami sampaikan. Atas perhatian dan kerja sama yang baik dari Bapak/Ibu, kami ucapkan terima kasih.</p>
+                        @else
+                            <p class="indent-8">Demikian surat pengantar/penyerahan ini kami sampaikan. Atas perhatian dan kerja sama yang baik dari Bapak/Ibu, kami ucapkan terima kasih.</p>
+                        @endif
                     </div>
 
                     <!-- Tanda Tangan -->
