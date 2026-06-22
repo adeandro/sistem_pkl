@@ -93,7 +93,7 @@
                                             </span>
                                         </td>
                                         <td class="px-6 py-4 text-right space-x-3">
-                                            @if($placement->students->count() > 0 && $placement->teacher)
+                                            @if($placement->students->count() > 0 && ($letterType === 'permohonan' || $placement->teacher))
                                                 <button wire:click="selectPlacementToPrint({{ $placement->id }})" class="px-3 py-1.5 bg-indigo-50 text-indigo-600 hover:bg-indigo-100 rounded-lg text-sm font-medium transition-colors border border-indigo-200 dark:bg-indigo-500/10 dark:text-indigo-400 dark:border-indigo-500/20 dark:hover:bg-indigo-500/20">
                                                     Lihat & Cetak
                                                 </button>
