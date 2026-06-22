@@ -129,16 +129,17 @@
         <style>
             @media print {
                 body * { visibility: hidden; }
-                #print-area, #print-area * { visibility: visible; }
-                #print-area {
+                .print-wrapper, .print-wrapper * { visibility: visible; }
+                .print-wrapper {
                     position: absolute;
                     left: 0;
                     top: 0;
+                    width: 100%;
                 }
                 @page { size: A4 portrait; margin: 0; }
             }
         </style>
-        <div class="fixed inset-0 z-[100] bg-slate-100 dark:bg-slate-900 overflow-y-auto print:bg-white print:static print:overflow-visible flex flex-col">
+        <div class="fixed inset-0 z-[100] bg-slate-100 dark:bg-slate-900 overflow-y-auto print:bg-white print:static print:overflow-visible flex flex-col print-wrapper">
             <div class="sticky top-0 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 p-4 flex justify-between items-center shadow-sm print:hidden z-10">
                 <div class="flex items-center gap-4">
                     <button wire:click="closePrintPreview" class="text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 transition-colors bg-slate-100 dark:bg-slate-800 p-2 rounded-full">
