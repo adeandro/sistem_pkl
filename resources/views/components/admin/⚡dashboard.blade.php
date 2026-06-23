@@ -76,8 +76,31 @@ new class extends Component {
         ];
     }
 }; ?>
+<div class="flex flex-col gap-6">
+    <!-- Stats Row -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-sm border border-slate-200/60 dark:border-slate-800 flex items-center gap-5">
+            <div class="p-3.5 bg-indigo-50 dark:bg-indigo-500/10 rounded-2xl text-indigo-600 dark:text-indigo-400">
+                <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+            </div>
+            <div>
+                <p class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">Total Kelompok</p>
+                <p class="text-3xl font-bold text-slate-900 dark:text-white">{{ $placements->count() }}</p>
+            </div>
+        </div>
+        
+        <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-sm border border-slate-200/60 dark:border-slate-800 flex items-center gap-5">
+            <div class="p-3.5 bg-emerald-50 dark:bg-emerald-500/10 rounded-2xl text-emerald-600 dark:text-emerald-400">
+                <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+            </div>
+            <div>
+                <p class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">Siswa Terdaftar</p>
+                <p class="text-3xl font-bold text-slate-900 dark:text-white">{{ \App\Models\Student::where('is_assigned', true)->count() }} <span class="text-lg font-semibold text-slate-400">/ {{ \App\Models\Student::count() }}</span></p>
+            </div>
+        </div>
+    </div>
 
-<div class="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200/60 dark:border-slate-800 overflow-hidden flex flex-col">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200/60 dark:border-slate-800 overflow-hidden flex flex-col">
     <div class="p-5 border-b border-slate-200/60 dark:border-slate-800 flex justify-between items-center bg-white dark:bg-slate-900">
         <h3 class="text-lg font-semibold tracking-tight text-slate-900 dark:text-white">Daftar Tempat PKL</h3>
         <button wire:click="exportExcel" class="px-4 py-2 bg-white border border-slate-200 text-slate-700 rounded-xl shadow-sm hover:bg-slate-50 transition-all duration-200 font-medium text-sm active:scale-[0.98] flex items-center gap-2 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-700">
