@@ -31,6 +31,14 @@ new class extends Component {
             session()->flash('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
+
+    public function deleteAllStudents()
+    {
+        \Illuminate\Support\Facades\DB::table('placement_student')->delete();
+        \App\Models\Student::query()->delete();
+        session()->flash('message', 'Seluruh data siswa berhasil dihapus.');
+        $this->dispatch('placementAdded'); // refresh placements since students are gone
+    }
 }; ?>
 
 <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200/60 dark:border-slate-800 p-6 flex flex-col">
@@ -88,4 +96,11 @@ new class extends Component {
             </button>
         </div>
     </form>
+
+    <div class="mt-5 pt-5 border-t border-slate-200/60 dark:border-slate-800">
+        <button wire:click="deleteAllStudents" wire:confirm="PERINGATAN BAHAYA: Apakah Anda yakin ingin menghapus SELURUH data siswa dari database? Semua kelompok akan kehilangan anggota siswanya. Aksi ini tidak dapat dibatalkan!" class="w-full px-4 py-2 bg-white border border-red-200 text-red-600 hover:bg-red-50 hover:border-red-300 rounded-xl shadow-sm transition-colors text-sm font-medium dark:bg-slate-800 dark:border-red-900/30 dark:text-red-400 dark:hover:bg-red-900/20 flex justify-center items-center gap-2">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+            Hapus Semua Data Siswa
+        </button>
+    </div>
 </div>
