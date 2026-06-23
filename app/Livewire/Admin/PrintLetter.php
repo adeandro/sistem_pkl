@@ -14,6 +14,7 @@ class PrintLetter extends Component
     public $endDate;
     public $headmasterName;
     public $headmasterNip;
+    public $headmasterIdType;
     public $letterNumber;
     public $attachment;
     public $letterType;
@@ -34,6 +35,7 @@ class PrintLetter extends Component
         $this->endDate = session('print_end_date', date('Y-m-d', strtotime('+3 months')));
         $this->headmasterName = session('print_headmaster_name', '');
         $this->headmasterNip = session('print_headmaster_nip', '');
+        $this->headmasterIdType = session('print_headmaster_id_type', 'NIP');
         $this->letterNumber = session('print_letter_number', '... /SMK.AL/PKL/' . date('Y'));
         $this->attachment = session('print_attachment', '1 (Satu) Berkas');
         $this->letterType = session('print_letter_type', 'permohonan');

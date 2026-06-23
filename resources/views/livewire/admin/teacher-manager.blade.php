@@ -25,8 +25,14 @@
                             @error('name') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">NIP (Opsional)</label>
-                            <input type="text" wire:model="nip" class="w-full rounded-xl border-slate-200 shadow-sm focus:border-violet-500 focus:ring focus:ring-violet-500/20 dark:bg-slate-950 dark:border-slate-800 dark:text-white" placeholder="-">
+                            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Jenis & Nomor Induk (Opsional)</label>
+                            <div class="flex gap-2">
+                                <select wire:model="id_type" class="w-24 rounded-xl border-slate-200 shadow-sm focus:border-violet-500 focus:ring focus:ring-violet-500/20 dark:bg-slate-950 dark:border-slate-800 dark:text-white">
+                                    <option value="NIP">NIP</option>
+                                    <option value="NIY">NIY</option>
+                                </select>
+                                <input type="text" wire:model="nip" class="flex-1 rounded-xl border-slate-200 shadow-sm focus:border-violet-500 focus:ring focus:ring-violet-500/20 dark:bg-slate-950 dark:border-slate-800 dark:text-white" placeholder="199xxx">
+                            </div>
                             @error('nip') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
                         </div>
                         <div class="pt-2 flex gap-2">
@@ -41,6 +47,10 @@
                         </div>
                     </form>
                 </div>
+                
+                <div class="mt-6">
+                    <livewire:admin.import-teachers />
+                </div>
             </div>
 
             <!-- Table Section -->
@@ -50,7 +60,7 @@
                         <thead class="bg-slate-50 dark:bg-slate-800/50 text-slate-800 dark:text-slate-200 uppercase text-xs font-semibold border-b border-slate-200/60 dark:border-slate-800">
                             <tr>
                                 <th class="px-6 py-4">Nama Guru</th>
-                                <th class="px-6 py-4">NIP</th>
+                                <th class="px-6 py-4">Nomor Induk</th>
                                 <th class="px-6 py-4 text-right">Aksi</th>
                             </tr>
                         </thead>
@@ -58,7 +68,7 @@
                             @forelse($teachers as $teacher)
                                 <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/20 transition-colors">
                                     <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">{{ $teacher->name }}</td>
-                                    <td class="px-6 py-4">{{ $teacher->nip ?: '-' }}</td>
+                                    <td class="px-6 py-4">{{ $teacher->nip ? $teacher->id_type . '. ' . $teacher->nip : '-' }}</td>
                                     <td class="px-6 py-4 text-right space-x-3">
                                         <button wire:click="editTeacher({{ $teacher->id }})" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium">Edit</button>
                                         <button wire:click="deleteTeacher({{ $teacher->id }})" onclick="confirm('Yakin ingin menghapus guru ini?') || event.stopImmediatePropagation()" class="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 font-medium">Hapus</button>

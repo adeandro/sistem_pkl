@@ -48,8 +48,14 @@
                                 <input type="text" wire:model.live="headmasterName" class="w-full rounded-xl border-slate-200 shadow-sm focus:border-violet-500 focus:ring focus:ring-violet-500/20 dark:bg-slate-950 dark:border-slate-800 dark:text-white" placeholder="Nama Kepala Sekolah">
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">NIP Kepala Sekolah</label>
-                                <input type="text" wire:model.live="headmasterNip" class="w-full rounded-xl border-slate-200 shadow-sm focus:border-violet-500 focus:ring focus:ring-violet-500/20 dark:bg-slate-950 dark:border-slate-800 dark:text-white" placeholder="NIP">
+                                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Nomor Induk Kepala Sekolah</label>
+                                <div class="flex gap-2">
+                                    <select wire:model.live="headmasterIdType" class="w-24 rounded-xl border-slate-200 shadow-sm focus:border-violet-500 focus:ring focus:ring-violet-500/20 dark:bg-slate-950 dark:border-slate-800 dark:text-white">
+                                        <option value="NIP">NIP</option>
+                                        <option value="NIY">NIY</option>
+                                    </select>
+                                    <input type="text" wire:model.live="headmasterNip" class="flex-1 rounded-xl border-slate-200 shadow-sm focus:border-violet-500 focus:ring focus:ring-violet-500/20 dark:bg-slate-950 dark:border-slate-800 dark:text-white" placeholder="Nomor Induk">
+                                </div>
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Tanda Tangan Kepala Sekolah (Opsional)</label>
@@ -270,7 +276,7 @@
                                     <span class="w-14">Nama</span> <span>:</span> <span class="font-bold">{{ $selectedPlacement->teacher->name }}</span>
                                 </p>
                                 <p class="ml-8 flex items-center gap-2 mt-0.5">
-                                    <span class="w-14">NIP</span> <span>:</span> <span>{{ $selectedPlacement->teacher->nip ?: '-' }}</span>
+                                    <span class="w-14">{{ $selectedPlacement->teacher->id_type ?? 'NIP' }}</span> <span>:</span> <span>{{ $selectedPlacement->teacher->nip ?: '-' }}</span>
                                 </p>
                             </div>
                         @endif
@@ -293,7 +299,7 @@
                                     <div class="h-20"></div>
                                 @endif
                                 <p class="font-bold underline uppercase tracking-wide">{{ $headmasterName ?: '..........................................' }}</p>
-                                <p class="mt-1">NIP. {{ $headmasterNip ?: '................................' }}</p>
+                                <p class="mt-1">{{ $headmasterIdType }}. {{ $headmasterNip ?: '................................' }}</p>
                             </div>
                         </div>
                     </div>
