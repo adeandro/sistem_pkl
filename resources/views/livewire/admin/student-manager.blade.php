@@ -12,7 +12,33 @@
     @endif
 
     <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
-        <div class="xl:col-span-1">
+        <div class="xl:col-span-1 flex flex-col gap-8">
+            <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200/60 dark:border-slate-800 p-6">
+                <h3 class="font-semibold text-lg mb-4 text-slate-800 dark:text-white">{{ $editingId ? 'Edit Data Siswa' : 'Tambah Siswa Baru' }}</h3>
+                <form wire:submit="saveStudent" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">NIS</label>
+                        <input type="text" wire:model="nis" class="w-full rounded-xl border-slate-200 shadow-sm focus:border-violet-500 focus:ring focus:ring-violet-500/20 dark:bg-slate-950 dark:border-slate-800 dark:text-white" placeholder="Contoh: 12345">
+                        @error('nis') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Nama Siswa</label>
+                        <input type="text" wire:model="name" class="w-full rounded-xl border-slate-200 shadow-sm focus:border-violet-500 focus:ring focus:ring-violet-500/20 dark:bg-slate-950 dark:border-slate-800 dark:text-white" placeholder="Contoh: Budi Santoso">
+                        @error('name') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="pt-2 flex gap-2">
+                        <button type="submit" class="flex-1 bg-violet-600 hover:bg-violet-700 text-white px-4 py-2 rounded-xl font-medium transition-colors">
+                            {{ $editingId ? 'Simpan' : 'Tambahkan' }}
+                        </button>
+                        @if($editingId)
+                            <button type="button" wire:click="resetForm" class="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 px-4 py-2 rounded-xl font-medium transition-colors">
+                                Batal
+                            </button>
+                        @endif
+                    </div>
+                </form>
+            </div>
+
             <livewire:admin.import-students />
         </div>
 
@@ -49,6 +75,9 @@
                                         @endif
                                     </td>
                                     <td class="px-6 py-4 text-right">
+                                        <button wire:click="editStudent({{ $student->id }})" class="text-sm font-medium text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors px-3 py-1.5 rounded-xl hover:bg-blue-50 dark:hover:bg-blue-900/20 border border-transparent hover:border-blue-200 dark:hover:border-blue-800">
+                                            Edit
+                                        </button>
                                         <button wire:click="deleteStudent({{ $student->id }})" wire:confirm="Yakin ingin menghapus data siswa ini secara permanen?" class="text-sm font-medium text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition-colors px-3 py-1.5 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/20 border border-transparent hover:border-red-200 dark:hover:border-red-800">
                                             Hapus
                                         </button>
