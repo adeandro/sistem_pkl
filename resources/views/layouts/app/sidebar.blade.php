@@ -15,6 +15,9 @@
                     <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
                     </flux:sidebar.item>
+                    <flux:sidebar.item icon="users" :href="route('admin.students')" :current="request()->routeIs('admin.students')" wire:navigate>
+                        {{ __('Data Siswa') }}
+                    </flux:sidebar.item>
                     <flux:sidebar.item icon="users" :href="route('admin.teachers')" :current="request()->routeIs('admin.teachers')" wire:navigate>
                         {{ __('Guru Pembimbing') }}
                     </flux:sidebar.item>
