@@ -87,7 +87,7 @@ new class extends Component {
         </div>
 
         <div>
-            <button type="submit" class="w-full px-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl shadow-sm hover:shadow-md transition-all duration-200 font-medium active:scale-[0.98] dark:bg-indigo-600 dark:hover:bg-indigo-500 flex justify-center items-center gap-2" wire:loading.attr="disabled">
+            <button type="submit" class="w-full px-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl shadow-sm hover:shadow-md transition-all duration-200 font-medium active:scale-[0.98] dark:bg-violet-600 dark:hover:bg-violet-500 flex justify-center items-center gap-2" wire:loading.attr="disabled">
                 <svg wire:loading.remove wire:target="import" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
                 <span wire:loading.remove wire:target="import">Upload & Import</span>
                 

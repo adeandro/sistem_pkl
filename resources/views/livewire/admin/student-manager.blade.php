@@ -45,7 +45,7 @@
         <div class="xl:col-span-2">
             <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200/60 dark:border-slate-800 flex flex-col">
                 <div class="p-5 border-b border-slate-200/60 dark:border-slate-800 bg-white dark:bg-slate-900 flex flex-col sm:flex-row justify-between gap-4">
-                    <input type="text" wire:model.live="search" placeholder="Cari Nama atau NIS..." class="w-full sm:w-64 rounded-xl border-slate-200 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500/20 dark:bg-slate-950 dark:border-slate-800 dark:text-slate-200 transition-colors text-sm">
+                    <input type="text" wire:model.live="search" placeholder="Cari Nama atau NIS..." class="w-full sm:w-64 rounded-xl border-slate-200 shadow-sm focus:border-violet-500 focus:ring focus:ring-violet-500/20 dark:bg-slate-950 dark:border-slate-800 dark:text-slate-200 transition-colors text-sm">
                 </div>
 
                 <div class="overflow-x-auto">

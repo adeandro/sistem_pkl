@@ -132,13 +132,13 @@ new class extends Component {
                                         value="{{ $placement->quota }}"
                                         wire:change="updateQuota({{ $placement->id }}, $event.target.value)"
                                         placeholder="Tak Terbatas"
-                                        class="flex-1 px-2.5 py-1 text-xs rounded-lg border-slate-200 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500/20 dark:bg-slate-950 dark:border-slate-800 dark:text-slate-200 transition-colors">
+                                        class="flex-1 px-2.5 py-1 text-xs rounded-lg border-slate-200 shadow-sm focus:border-violet-500 focus:ring focus:ring-violet-500/20 dark:bg-slate-950 dark:border-slate-800 dark:text-slate-200 transition-colors">
                                 </div>
                                 <div class="flex items-center gap-2">
                                     <span class="text-xs text-slate-500 w-24">Guru Pembimbing:</span>
                                     <select 
                                         wire:change="assignTeacher({{ $placement->id }}, $event.target.value)"
-                                        class="flex-1 px-2.5 py-1 text-xs rounded-lg border-slate-200 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500/20 dark:bg-slate-950 dark:border-slate-800 dark:text-slate-200 transition-colors">
+                                        class="flex-1 px-2.5 py-1 text-xs rounded-lg border-slate-200 shadow-sm focus:border-violet-500 focus:ring focus:ring-violet-500/20 dark:bg-slate-950 dark:border-slate-800 dark:text-slate-200 transition-colors">
                                         <option value="">-- Belum Ditugaskan --</option>
                                         @foreach($teachers as $teacher)
                                             <option value="{{ $teacher->id }}" {{ $placement->teacher_id == $teacher->id ? 'selected' : '' }}>
@@ -166,11 +166,11 @@ new class extends Component {
                             @endif
                         </td>
                         <td class="px-6 py-5 align-top text-right whitespace-nowrap">
-                            <div class="flex flex-col items-end gap-2">
-                                <button wire:click="editPlacement({{ $placement->id }})" class="text-sm font-medium text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300 transition-colors">
+                            <div class="flex flex-col items-end gap-1.5">
+                                <button wire:click="editPlacement({{ $placement->id }})" class="text-sm font-medium text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors px-3 py-1.5 rounded-xl hover:bg-blue-50 dark:hover:bg-blue-900/20 border border-transparent hover:border-blue-200 dark:hover:border-blue-800 w-full text-center sm:text-right sm:w-auto">
                                     Edit
                                 </button>
-                                <button wire:click="deletePlacement({{ $placement->id }})" wire:confirm="Yakin menghapus penempatan ini? Seluruh siswanya akan kembali menjadi belum terdaftar." class="text-sm font-medium text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition-colors">
+                                <button wire:click="deletePlacement({{ $placement->id }})" wire:confirm="Yakin menghapus penempatan ini? Seluruh siswanya akan kembali menjadi belum terdaftar." class="text-sm font-medium text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition-colors px-3 py-1.5 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/20 border border-transparent hover:border-red-200 dark:hover:border-red-800 w-full text-center sm:text-right sm:w-auto">
                                     Hapus
                                 </button>
                             </div>

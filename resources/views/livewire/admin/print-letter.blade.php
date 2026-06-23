@@ -88,7 +88,7 @@
                         <div class="p-4 border-b border-slate-200/60 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/20">
                             <span class="text-xs font-semibold text-slate-500 uppercase">Daftar Tempat PKL & Kelompok</span>
                             @if($placements->filter(function($p) use ($letterType) { return $p->students->count() > 0 && ($letterType === 'permohonan' || $p->teacher); })->count() > 0)
-                                <button wire:click="selectAllToPrint" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-semibold transition-colors flex items-center gap-2 shadow-sm">
+                                <button wire:click="selectAllToPrint" class="px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-lg text-xs font-semibold transition-colors flex items-center gap-2 shadow-sm">
                                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
                                     Cetak Semua Kelompok (Batch Print)
                                 </button>
@@ -121,7 +121,7 @@
                                         </td>
                                         <td class="px-6 py-4 text-right space-x-3">
                                             @if($placement->students->count() > 0 && ($letterType === 'permohonan' || $placement->teacher))
-                                                <button wire:click="selectPlacementToPrint({{ $placement->id }})" class="px-3 py-1.5 bg-indigo-50 text-indigo-600 hover:bg-indigo-100 rounded-lg text-sm font-medium transition-colors border border-indigo-200 dark:bg-indigo-500/10 dark:text-indigo-400 dark:border-indigo-500/20 dark:hover:bg-indigo-500/20">
+                                                <button wire:click="selectPlacementToPrint({{ $placement->id }})" class="px-3 py-1.5 bg-violet-50 text-violet-600 hover:bg-violet-100 rounded-lg text-sm font-medium transition-colors border border-violet-200 dark:bg-violet-500/10 dark:text-violet-400 dark:border-violet-500/20 dark:hover:bg-violet-500/20">
                                                     Lihat & Cetak
                                                 </button>
                                             @else
@@ -165,7 +165,7 @@
                     </button>
                     <h3 class="font-bold text-slate-800 dark:text-white">Pratinjau Surat: {{ count($placementsToPrint) > 1 ? count($placementsToPrint).' Surat Sekaligus (Batch)' : $placementsToPrint->first()->company_name }}</h3>
                 </div>
-                <button onclick="window.print()" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl shadow-sm hover:shadow-md transition-all duration-200 font-semibold text-sm flex items-center gap-2">
+                <button onclick="window.print()" class="px-5 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-xl shadow-sm hover:shadow-md transition-all duration-200 font-semibold text-sm flex items-center gap-2">
                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
                     Cetak Surat
                 </button>

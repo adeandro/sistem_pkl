@@ -178,7 +178,7 @@ new class extends Component {
     <form wire:submit="save" class="space-y-5 flex-1 flex flex-col">
         <div>
             <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">Nama Instansi / Perusahaan</label>
-            <input type="text" wire:model.live="companyName" placeholder="Contoh: PT Teknologi Terdepan" class="block w-full rounded-xl border-slate-200 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500/20 dark:bg-slate-950 dark:border-slate-800 dark:text-white sm:text-sm transition-all duration-200 px-4 py-2.5">
+            <input type="text" wire:model.live="companyName" placeholder="Contoh: PT Teknologi Terdepan" class="block w-full rounded-xl border-slate-200 shadow-sm focus:border-violet-500 focus:ring focus:ring-violet-500/20 dark:bg-slate-950 dark:border-slate-800 dark:text-white sm:text-sm transition-all duration-200 px-4 py-2.5">
             @if(!$editId)
                 <p class="text-[13px] text-slate-500 dark:text-slate-400 mt-2 flex items-start gap-1.5">
                     <svg class="w-4 h-4 text-slate-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -200,8 +200,8 @@ new class extends Component {
                 @else
                     <div class="grid grid-cols-1 gap-1">
                         @foreach($availableStudents as $student)
-                            <label class="flex items-center p-3 hover:bg-white dark:hover:bg-slate-800 rounded-lg cursor-pointer transition-all duration-200 border border-transparent hover:border-slate-200 hover:shadow-sm dark:hover:border-slate-700 {{ in_array($student->id, $selectedStudents) ? 'bg-white shadow-sm border-slate-200 dark:bg-slate-800 dark:border-slate-700' : '' }}">
-                                <input type="checkbox" wire:model="selectedStudents" value="{{ $student->id }}" class="w-4 h-4 rounded border-slate-300 text-indigo-600 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500/20 dark:border-slate-600 dark:bg-slate-900">
+                            <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer transition-colors {{ in_array($student->id, $selectedStudents) ? 'bg-violet-50 border-violet-200 dark:bg-violet-500/10 dark:border-violet-500/30' : '' }}">
+                                <input type="checkbox" wire:model="selectedStudents" value="{{ $student->id }}" class="w-4 h-4 rounded border-slate-300 text-violet-600 shadow-sm focus:border-violet-500 focus:ring focus:ring-violet-500/20 dark:border-slate-600 dark:bg-slate-900">
                                 <div class="ml-3 flex flex-col">
                                     <span class="text-sm font-medium text-slate-700 dark:text-slate-200">{{ $student->name }}</span>
                                     <span class="text-xs text-slate-500">{{ $student->nis }}</span>
@@ -214,8 +214,9 @@ new class extends Component {
             @error('selectedStudents') <span class="text-sm text-red-500 mt-1.5 block">{{ $message }}</span> @enderror
         </div>
 
-        <div class="pt-4 mt-auto">
-            <button type="submit" class="w-full px-6 py-2.5 bg-indigo-600 text-white rounded-xl shadow-sm hover:bg-indigo-700 hover:shadow transition-all duration-200 font-medium active:scale-[0.98] flex justify-center items-center gap-2" wire:loading.attr="disabled">
+        <div class="pt-2">
+            <button type="submit" class="w-full px-6 py-2.5 bg-violet-600 text-white rounded-xl shadow-sm hover:bg-violet-700 hover:shadow transition-all duration-200 font-medium active:scale-[0.98] flex justify-center items-center gap-2" wire:loading.attr="disabled">
+                <svg wire:loading.remove wire:target="save" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
                 <span wire:loading.remove wire:target="save">
                     {{ $editId ? 'Simpan Perubahan' : 'Simpan Penempatan' }}
                 </span>

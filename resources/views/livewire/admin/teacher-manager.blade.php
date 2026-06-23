@@ -69,9 +69,13 @@
                                 <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/20 transition-colors">
                                     <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">{{ $teacher->name }}</td>
                                     <td class="px-6 py-4">{{ $teacher->nip ? $teacher->id_type . '. ' . $teacher->nip : '-' }}</td>
-                                    <td class="px-6 py-4 text-right space-x-3">
-                                        <button wire:click="editTeacher({{ $teacher->id }})" class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium">Edit</button>
-                                        <button wire:click="deleteTeacher({{ $teacher->id }})" onclick="confirm('Yakin ingin menghapus guru ini?') || event.stopImmediatePropagation()" class="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 font-medium">Hapus</button>
+                                    <td class="px-6 py-4 text-right space-x-2">
+                                        <button wire:click="editTeacher({{ $teacher->id }})" class="text-sm font-medium text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 transition-colors px-3 py-1.5 rounded-xl hover:bg-blue-50 dark:hover:bg-blue-900/20 border border-transparent hover:border-blue-200 dark:hover:border-blue-800">
+                                            Edit
+                                        </button>
+                                        <button wire:click="deleteTeacher({{ $teacher->id }})" onclick="confirm('Yakin ingin menghapus guru ini?') || event.stopImmediatePropagation()" class="text-sm font-medium text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition-colors px-3 py-1.5 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/20 border border-transparent hover:border-red-200 dark:hover:border-red-800">
+                                            Hapus
+                                        </button>
                                     </td>
                                 </tr>
                             @empty
