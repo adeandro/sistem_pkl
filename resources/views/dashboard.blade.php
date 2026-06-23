@@ -7,7 +7,6 @@
         
         <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
             <div class="xl:col-span-1 flex flex-col gap-8">
-                <livewire:admin.import-students />
                 <livewire:admin.placement-form />
             </div>
             <div class="xl:col-span-2">
